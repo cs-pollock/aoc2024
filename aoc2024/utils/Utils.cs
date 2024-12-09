@@ -12,4 +12,15 @@ public class Utils
         var clean = splitted.Select(a => a.Trim()).Where(a => !string.IsNullOrEmpty(a)).ToArray();
         return clean;
     }
+    
+    public static string GetInputFromFile(string inputFileLocation)
+    {
+        StreamReader sr = new(inputFileLocation);
+        var input = sr.ReadToEnd();
+
+        if (input == null)
+            throw new Exception("Input file null");
+
+        return input;
+    }
 }
