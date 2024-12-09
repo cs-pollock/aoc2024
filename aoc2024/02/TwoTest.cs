@@ -29,6 +29,7 @@ public class TwoTest
     [TestMethod]
     public void SolveB()
     {
-        
+        var solution = Two.RunB(Utils.GetInputFromFile(INPUT_LOCATION));
+        Assert.AreEqual(531, solution);
     }
 }
