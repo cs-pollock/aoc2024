@@ -14,7 +14,7 @@ public class OneTest
     public void RunB()
     {
         var result = One.RunB(GetInputFromFile());
-        Assert.AreEqual(0, result);
+        Assert.AreEqual(26674158, result);
     }
 
     private static string GetInputFromFile()
