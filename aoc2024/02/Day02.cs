@@ -2,7 +2,7 @@ using aoc2024.utils;
 
 namespace aoc2024;
 
-public class Two()
+public class Day02
 {
     public static int RunA(string input)
     {

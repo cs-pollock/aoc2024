@@ -3,7 +3,7 @@ using aoc2024.utils;
 namespace aoc2024;
 
 [TestClass]
-public class TwoTest
+public class Day02Test
 {
     private const string INPUT_LOCATION = """D:\code\aoc2024\aoc2024\02\input.txt""";
 
@@ -16,20 +16,20 @@ public class TwoTest
     [DataRow(new int[] {1, 3, 6, 7, 9}, true)]
     public void TestIsReportSafe(int[] report, bool IsReportSafe)
     {
-        Assert.AreEqual(IsReportSafe, Two.IsReportSafe(report));
+        Assert.AreEqual(IsReportSafe, Day02.IsReportSafe(report));
     }
 
     [TestMethod]
     public void SolveA()
     {
-        var solution = Two.RunA(Utils.GetInputFromFile(INPUT_LOCATION));
+        var solution = Day02.RunA(Utils.GetInputFromFile(INPUT_LOCATION));
         Assert.AreEqual(479, solution);
     }
 
     [TestMethod]
     public void SolveB()
     {
-        var solution = Two.RunB(Utils.GetInputFromFile(INPUT_LOCATION));
+        var solution = Day02.RunB(Utils.GetInputFromFile(INPUT_LOCATION));
         Assert.AreEqual(531, solution);
     }
 }

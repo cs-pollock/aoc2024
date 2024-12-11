@@ -2,7 +2,7 @@ using aoc2024.utils;
 
 namespace aoc2024;
 
-public class One
+public class Day01
 {
     public static int RunA(string dataStream)
     {
