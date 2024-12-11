@@ -14,8 +14,9 @@ public class Day03
         );
     }
 
-    public static void RunB()
+    public static int RunB(string input)
     {
-        
+        var clean = Regex.Replace(input, @"(?=don't\(\)).+?((?=do\(\))|$)", string.Empty, RegexOptions.Singleline);
+        return RunA(clean);
     }
 }
