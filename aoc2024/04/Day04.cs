@@ -6,18 +6,25 @@ public class Day04
 {
     private static int maxI;
     private static int maxJ;
+    private static  char[][] charMatrix;
+
     public static int RunA(string input)
     {
-        var charMatrix = GetCharMatrix(input);
-        maxI = charMatrix.Length - 1;
-        maxJ = charMatrix[0].Length - 1;
+        SetUp(input);
 
         int result = 0;
         for (int i = 0; i < charMatrix.Length; i++)
             for (int j = 0; j < charMatrix[i].Length; j++)
-                result += FindWholeWordMatchesFromPosition2(charMatrix, ['X', 'M', 'A', 'S'], new (i, j));
+                result += FindWholeWordMatchesFromPosition2(['X', 'M', 'A', 'S'], new (i, j));
 
         return result;
+    }
+
+    private static void SetUp(string input)
+    {
+        charMatrix = GetCharMatrix(input);
+        maxI = charMatrix.Length - 1;
+        maxJ = charMatrix[0].Length - 1;
     }
 
     private record Position(int I, int J)
@@ -38,7 +45,17 @@ public class Day04
         new (1,- 1),
     ];
 
-    private static char? GetCharAtPosition(char[][] charMatrix, Position position)
+    private static readonly Position[] XMasSearchVectorsA = [
+        new (- 1,- 1),
+        new (1, 1),
+    ];
+
+    private static readonly Position[] XMasSearchVectorsB = [
+        new (- 1, 1),
+        new (1,- 1),
+    ];
+
+    private static char? GetCharAtPosition(Position position)
     {
         if (!IsPositionValid(position))
             return null;
@@ -47,7 +64,6 @@ public class Day04
     }
 
     private static int FindWholeWordMatchesFromPosition2(
-        char[][] charMatrix,
         char[] word,
         Position initialPosition)
     {
@@ -57,14 +73,14 @@ public class Day04
         int matches = 0;
         foreach (var searchVector in SearchVectors)
         {
-            if (GetCharAtPosition(charMatrix, initialPosition) != word[0])
+            if (GetCharAtPosition(initialPosition) != word[0])
                 continue;
 
             Position currentPosition = initialPosition;
             for (int k = 1; k < word.Length; k++)
             {
                 currentPosition = currentPosition.Add(searchVector);
-                if (GetCharAtPosition(charMatrix, currentPosition) != word[k])
+                if (GetCharAtPosition(currentPosition) != word[k])
                     break;
 
                 if (k == word.Length - 1)
@@ -137,6 +153,36 @@ public class Day04
 
     public static int RunB(string input)
     {
+        SetUp(input);
+
+        int result = 0;
+        for (int i = 0; i < charMatrix.Length; i++)
+            for (int j = 0; j < charMatrix[i].Length; j++)
+                result += FindXMasInstancesFromPosition(new (i, j));
+
+        return result;
+    }
+
+    private static int FindXMasInstancesFromPosition(Position position)
+    {
+        if (GetCharAtPosition(position) != 'A')
+            return 0;
+
+        List<char?> validChars = ['M', 'S'];
+        var a1 = GetCharAtPosition(position.Add(XMasSearchVectorsA[0]));
+        var a2 = GetCharAtPosition(position.Add(XMasSearchVectorsA[1]));
+
+        var b1 = GetCharAtPosition(position.Add(XMasSearchVectorsB[0]));
+        var b2 = GetCharAtPosition(position.Add(XMasSearchVectorsB[1]));
+
+        if (validChars.Contains(a1)
+            && validChars.Contains(a2)
+            && validChars.Contains(b1)
+            && validChars.Contains(b2)
+            && a1 != a2
+            && b1 != b2
+        ) return 1;
+
         return 0;
     }
 }

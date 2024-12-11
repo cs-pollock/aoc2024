@@ -7,7 +7,7 @@ public class Day04Test
 {
     private const string INPUT_LOCATION = """D:\code\aoc2024\aoc2024\04\input.txt""";
     private const string TEST_INPUT_LOCATION = """D:\code\aoc2024\aoc2024\04\testInput.txt""";
-    
+
     [TestMethod]
     public void SolveA()
     {
@@ -26,6 +26,6 @@ public class Day04Test
     public void SolveB()
     {
         var solution = Day04.RunB(Utils.GetInputFromFile(INPUT_LOCATION));
-        Assert.AreEqual(0, solution);
+        Assert.AreEqual(1877, solution);
     }
 }
