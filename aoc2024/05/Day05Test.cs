@@ -1,3 +1,4 @@
+using FluentAssertions;
 using aoc2024.utils;
 
 namespace aoc2024;
@@ -20,6 +21,17 @@ public class Day05Test
     {
         var solution = Day05.RunA(Utils.GetInputFromFile(INPUT_LOCATION));
         Assert.AreEqual(4959, solution);
+    }
+
+    [TestMethod]
+    [DataRow(new int[] {75, 97, 47, 61, 53}, new int[] {97,75,47,61,53})]
+    [DataRow(new int[] {61, 13, 29}, new int[] {61, 29, 13})]
+    [DataRow(new int[] {97, 13, 75, 29, 47}, new int[] {97, 75, 47, 29, 13})]
+    public void TestB(int[] invalidUpdate, int[] validUpdate)
+    {
+        Day05.SetUp(Utils.GetInputFromFile(TEST_INPUT_LOCATION));
+        var fixedUpdate = Day05.FixUpdate(invalidUpdate);
+        fixedUpdate.Should().BeEquivalentTo(validUpdate);
     }
 
     [TestMethod]

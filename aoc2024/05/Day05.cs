@@ -20,6 +20,12 @@ public class Day05
         return updates.Aggregate(0, (result, update) => result + update[update.Length / 2]);
     }
 
+    public static void SetUp(string input)
+    {
+        var (rules, _) = ParseInput(input);
+        OrderRules(rules);
+    }
+
     private static void OrderRules(int[][] rules)
     {
         cannotGoBefore = rules.GroupBy(rule => rule[0], rule => rule[1])
@@ -90,7 +96,7 @@ public class Day05
         return AddMiddlePositions(fixedUpdates);
     }
 
-    private static int[] FixUpdate(int[] invalidUpdate)
+    public static int[] FixUpdate(int[] invalidUpdate)
     {
         int[] pendingNumbers = [.. invalidUpdate];
         List<int> fixedUpdate = [];
@@ -103,6 +109,18 @@ public class Day05
         }
 
         return [.. fixedUpdate];
+    }
+
+    private static int[] FixUpdate2(int[] invalidUpdate)
+    {
+        var validUpdate = (int[]) invalidUpdate.Clone();
+        validUpdate.ToList().Sort(SortingAlg);
+        return validUpdate;
+    }
+
+    private static int SortingAlg(int current, int other)
+    {
+        return 1;
     }
 
     private static int GetNextValidNumber(int[] pendingNumbers)
