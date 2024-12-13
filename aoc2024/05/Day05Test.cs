@@ -26,6 +26,6 @@ public class Day05Test
     public void SolveB()
     {
         var solution = Day05.RunB(Utils.GetInputFromFile(INPUT_LOCATION));
-        Assert.AreEqual(0, solution);
+        Assert.AreEqual(9614, solution);
     }
 }
